@@ -18,7 +18,6 @@ public class InscripcionService {
     private final EstudianteRepository estudianteRepo;
     private final CursoRepository cursoRepo;
 
-    // Crear inscripción
     public Inscripcion crearInscripcion(InscripcionDTO dto) {
         Estudiante estudiante = estudianteRepo.findById(dto.getIdEstudiante())
                 .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
@@ -33,43 +32,35 @@ public class InscripcionService {
         return inscripcionRepo.save(inscripcion);
     }
 
-    // Listar todas las inscripciones
     public List<Inscripcion> listarTodas() {
         return inscripcionRepo.findAll();
     }
 
-    // Buscar inscripción por ID
     public Inscripcion buscarPorId(Long id) {
         return inscripcionRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Inscripción no encontrada"));
     }
 
-    // Listar inscripciones por estudiante
     public List<Inscripcion> listarPorEstudiante(Long idEstudiante) {
         return inscripcionRepo.findByEstudiante_IdEstudiante(idEstudiante);
     }
 
-    // Listar inscripciones por curso
     public List<Inscripcion> listarPorCurso(Long idCurso) {
         return inscripcionRepo.findByCurso_IdCurso(idCurso);
     }
 
-    // Listar inscripciones por fecha exacta
     public List<Inscripcion> listarPorFecha(LocalDate fecha) {
         return inscripcionRepo.findByFechaInscripcion(fecha);
     }
 
-    // Listar inscripciones entre dos fechas
     public List<Inscripcion> listarPorRangoFechas(LocalDate inicio, LocalDate fin) {
         return inscripcionRepo.findByFechaInscripcionBetween(inicio, fin);
     }
 
-    // Eliminar inscripción
     public void eliminar(Long id) {
         inscripcionRepo.deleteById(id);
     }
 
-    // Actualización completa
     public Inscripcion actualizar(Long id, InscripcionDTO dto) {
         Inscripcion existente = buscarPorId(id);
 
@@ -85,7 +76,6 @@ public class InscripcionService {
         return inscripcionRepo.save(existente);
     }
 
-    // Actualización parcial
     public Inscripcion actualizarParcial(Long id, Map<String, Object> campos) {
         Inscripcion existente = buscarPorId(id);
 

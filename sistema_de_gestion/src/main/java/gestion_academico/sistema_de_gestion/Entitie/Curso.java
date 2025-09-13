@@ -4,10 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "curso")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "profesor")
+@EqualsAndHashCode(exclude = "profesor")
 public class Curso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCurso;
@@ -15,7 +20,7 @@ public class Curso {
     private String nombreCurso;
     private String descripcion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_profesor", nullable = false)
     private Profesor profesor;
 }

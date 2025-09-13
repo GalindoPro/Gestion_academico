@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "profesor")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Profesor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProfesor;
